@@ -8,6 +8,7 @@ const useData = () => useContext(DataContext);
 function DataProvider({ children }) {
   const [userData, setUserData] = useState([]);
   const [tweetData, setTweetData] = useState([]);
+  const [userTweets, setUserTweets] = useState([]);
 
   const getUsers = async () => {
     try {
@@ -22,10 +23,19 @@ function DataProvider({ children }) {
 
   const getTweets = async () => {
     try {
-      const response = await axios.get(
-        "http://localhost:8080/tweets/all"
-      );
+      const response = await axios.get("http://localhost:8080/tweets/all");
       setTweetData(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const getUserTweets = async (loginId) => {
+    try {
+      const response = await axios.get(
+        `http://localhost:8080/tweets/${loginId}`
+      );
+      setUserTweets(response.data);
     } catch (error) {
       console.error(error);
     }
@@ -38,8 +48,11 @@ function DataProvider({ children }) {
         setUserData,
         tweetData,
         setTweetData,
+        userTweets,
+        setUserTweets,
         getUsers,
         getTweets,
+        getUserTweets,
       }}
     >
       {children}

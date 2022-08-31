@@ -1,8 +1,11 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import { useAuth } from "../context/auth-context";
+import { useLocation } from "react-router-dom";
 
 export default function NavBar() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const { isLoggedIn, logoutHandler } = useAuth();
+  let location = useLocation();
   return (
     <div className="navigation-container">
       <div className="navigation-links">
@@ -11,32 +14,43 @@ export default function NavBar() {
           alt="logo"
           className="img-logo"
         />
-        <Link to="/" className="nav-links">
-          Home
-        </Link>
-        <Link to="/tweetslist" className="nav-links">
-          Tweet
-        </Link>
-        <Link to="/users" className="nav-links">
-          User
-        </Link>
+        {isLoggedIn && (
+          <>
+            <Link to="/" className="nav-links">
+              Home
+            </Link>
+            <Link to="/tweetslist" className="nav-links">
+              Tweet
+            </Link>
+            <Link to="/users" className="nav-links">
+              User
+            </Link>
+          </>
+        )}
       </div>
       <div className="navigation-tools">
         {isLoggedIn ? (
           <>
-            <Link to="/login">
-              <button className="btn btn-sm primary" onClick={() => {}}>
-                Logout
-              </button>
-            </Link>
+            <button className="btn btn-sm primary" onClick={logoutHandler}>
+              Logout
+            </button>
           </>
-        ) : (
+        ) : location.pathname === "/login" ? 
+        (
+          <Link to="/signup">
+            <button className="btn btn-sm primary" onClick={() => {}}>
+              Signup
+            </button>
+          </Link>
+        ):
+        (
           <Link to="/login">
             <button className="btn btn-sm primary" onClick={() => {}}>
               Login
             </button>
           </Link>
-        )}
+        )
+        }
       </div>
     </div>
   );

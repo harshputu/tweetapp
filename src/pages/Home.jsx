@@ -1,6 +1,16 @@
-import React from 'react';
+import React, { useEffect } from "react";
+import { TweetComp } from "../components/TweetComp";
+import { useAuth } from "../context/auth-context";
+import { useData } from "../context/data-context";
 
 export default function Home() {
+  const { loginInput } = useAuth();
+  const { userTweets, getUserTweets } = useData();
+
+  useEffect(() => {
+    getUserTweets();
+  }, [loginInput]);
+
   return (
     <div className="section-header-form">
       <p className="text-bold text-2xl text-center m-1"> welcome `username`</p>
@@ -25,11 +35,16 @@ export default function Home() {
         />
         <button
           className="btn btn-sm primary"
-          style={{ width: 300, margin: 'auto' }}
+          style={{ width: 300, margin: "auto" }}
         >
           Post Tweet
         </button>
       </form>
+      {userTweets.map(tweet => {
+        return  <TweetComp tweet={tweet} />
+      }
+        )}
+     
     </div>
   );
 }
