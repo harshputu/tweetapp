@@ -24,6 +24,12 @@ html,
   padding-bottom: 4rem;
 }
 
+.home-wrapper {
+  margin: 0 5rem;
+  display: flex;
+  flex-direction: column;
+}
+
 /* component Card */
 
 .card-wrapper {
@@ -140,7 +146,7 @@ html,
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 300px;
+  width: 280px;
 }
 
 .nav-links {
@@ -267,20 +273,18 @@ html,
   margin: auto;
 }
 
-.flex-center{
+.flex-center {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
 }
-.auth-container{
+.auth-container {
+  width: 30%;
   align-items: center;
   margin: auto;
   padding-left: 20%;
   padding-right: 20%;
-}
-.m-1{
-  display: block;
 }
 
 /* media queries */
