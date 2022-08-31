@@ -1,25 +1,25 @@
-import React from "react";
-import { MdDeleteForever, MdEdit, MdThumbUp, MdMessage } from "react-icons/md";
+import React from 'react';
+import { MdDeleteForever, MdEdit, MdThumbUp, MdMessage } from 'react-icons/md';
 
 function TweetComp() {
   return (
     <>
-      <div className="section-tweet">
-        <p>tweet heading</p>
-        <p>tweet hashtag</p>
+      <div className="section-tweet m-1">
+        <p className="text-xl">tweet heading</p>
+        <p className="text-lg">tweet hashtag</p>
         <div
           style={{
-            width: "20%",
-            display: "flex",
-            justifyContent: "space-between",
+            width: '20%',
+            display: 'flex',
+            justifyContent: 'space-between',
           }}
         >
-          <MdDeleteForever size={25} />
-          <MdEdit size={25} />
-          <MdThumbUp size={25} />
-          <MdMessage size={25} />
+          <MdDeleteForever size={25} color="darkblue" />
+          <MdEdit size={25} color="darkblue" />
+          <MdThumbUp size={25} color="darkblue" />
+          <MdMessage size={25} color="darkblue" />
         </div>
-        <p>date and time</p>
+        <p className="text-xs color-text-grey p-05">date and time</p>
       </div>
     </>
   );
@@ -28,7 +28,7 @@ function TweetComp() {
 export default function TweetListing() {
   return (
     <>
-      <div className="text-2xl">TweetListing</div>
+      <div className="text-2xl m-1">TweetListing</div>
       <TweetComp />
     </>
   );

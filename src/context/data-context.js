@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, useEffect } from 'react';
+import { createContext, useContext, useState } from 'react';
 import axios from 'axios';
 
 const DataContext = createContext();
@@ -8,16 +8,12 @@ const useData = () => useContext(DataContext);
 function DataProvider({ children }) {
   const [data, setData] = useState([]);
 
-  // useEffect(() => {
-  //   getUsers();
-  // }, []);
-
   const getUsers = async () => {
     try {
       const response = await axios.get(
         'http://localhost:8080/tweets/users/all'
       );
-      setData(response);
+      setData(response.data);
     } catch (error) {
       console.error(error);
     }
@@ -26,7 +22,7 @@ function DataProvider({ children }) {
   console.log(data);
 
   return (
-    <DataContext.Provider value={{ data, setData }}>
+    <DataContext.Provider value={{ data, setData, getUsers }}>
       {children}
     </DataContext.Provider>
   );
