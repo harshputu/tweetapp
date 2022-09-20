@@ -4,7 +4,7 @@ import { useAuth } from "../context/auth-context";
 import { useData } from "../context/data-context";
 
 export default function Home() {
-  const { loginInput } = useAuth();
+  const { loginInput, createTweet, loginId } = useAuth();
   const { userTweets, getUserTweets } = useData();
 
   useEffect(() => {
@@ -13,8 +13,9 @@ export default function Home() {
 
   return (
     <div className="section-header-form">
-      <p className="text-bold text-2xl text-center m-1"> welcome `username`</p>
-      <form className="home-wrapper">
+      <p className="text-bold text-2xl text-center m-1"> welcome {loginId}</p>
+      <form className="home-wrapper" onSubmit={(e)=>
+        e.preventDefault()}>
         <textarea
           placeholder="Write your Tweet"
           rows={10}

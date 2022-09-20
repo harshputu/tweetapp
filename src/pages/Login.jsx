@@ -2,7 +2,7 @@ import React from "react";
 import { useAuth } from "../context/auth-context";
 
 export default function Login() {
-  const { loginHandler, loginInput, setLoginInput } = useAuth();
+  const { loginHandler, loginInput, setLoginInput, isAuthCred} = useAuth();
 
   const loginInputHandler = (e) => {
     const { name, value } = e.target;
@@ -48,7 +48,6 @@ export default function Login() {
           >
             Login
           </button>
-          <div className="text-center p-1 anchor-text"></div>
         </form>
       </div>
     </section>

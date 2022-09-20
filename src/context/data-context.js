@@ -41,6 +41,16 @@ function DataProvider({ children }) {
     }
   };
 
+
+  const createTweet = async (loginId) => {
+    try {
+const response = await axios.post(`http://localhost:8080/tweets/${loginId}/add`);
+console.log("response",response)
+    } catch (error) { 
+      console.error(error);
+    }
+  }
+
   return (
     <DataContext.Provider
       value={{

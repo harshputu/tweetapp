@@ -12,22 +12,27 @@ function AuthProvider({ children }) {
     localStorage.getItem("isLoggedIn") || false
   );
   const [loginInput, setLoginInput] = useState({});
+  const [isAuthCred, setIsAuthCred] = useState('')
+  const [loginId, setLoginId] = useState('')
 
   const loginRequest = (input) => {
     const {loginId, password} = input;
+    setLoginId(loginId)
     return axios.get(`http://localhost:8080/authenticate/${loginId}/${password}`);
   };
 
   const loginHandler = async (e) => {
     e.preventDefault();
     try {
-      await loginRequest(loginInput);
-      localStorage.setItem("isLoggedIn", JSON.stringify(true));
-      setIsLoggedIn(true);
-      navigate("/");
-      setLoginInput({ loginId: "", password: "" });
+      const {data} = await loginRequest(loginInput);
+      if(data){
+        localStorage.setItem("isLoggedIn", JSON.stringify(true))
+        setIsLoggedIn(true) 
+        navigate("/")
+        setLoginInput({ loginId: "", passsword: "" })
+      }
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 
@@ -46,7 +51,8 @@ function AuthProvider({ children }) {
         setLoginInput,
         loginRequest,
         loginHandler,
-        logoutHandler
+        logoutHandler,
+        loginId
       }}
     >
       {children}
